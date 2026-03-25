@@ -1,0 +1,23 @@
+{% extends 'school/nav.html' %}
+
+{% block content %}
+
+<h2>Contact Us</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    Email:
+    <input type="email" name="email"><br><br>
+
+    Message:
+    <textarea name="message"></textarea><br><br>
+
+    Date:
+    <input type="date" name="date"><br><br>
+
+    <button type="submit">Send</button>
+
+</form>
+
+{% endblock %}

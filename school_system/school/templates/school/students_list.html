@@ -1,0 +1,19 @@
+{% extends 'school/base.html' %}
+
+{% block content %}
+
+<h2>Students List</h2>
+
+{% for student in students %}
+    <p>
+        {{ student.name }} -
+        {{ student.age }} -
+        {{ student.email }}
+    </p>
+
+    <img src="{{ student.image.url }}" width="150">
+    <hr>
+
+{% endfor %}
+
+{% endblock %}
