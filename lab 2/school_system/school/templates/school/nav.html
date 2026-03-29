@@ -1,0 +1,27 @@
+<nav class="navbar">
+    <div class="nav-brand">
+        <a href="/">School System</a>
+    </div>
+    
+    <ul class="nav-links">
+        
+        
+        {% if user.is_authenticated %}
+            <li><a href="/">Home</a></li>
+            <li><a href="/students/">Students</a></li>
+            <li><a href="/subjects/">Subjects</a></li>
+            <li><a href="/grades/">Grades</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="nav-user-menu">
+        {% if user.is_authenticated %}
+            <span class="user-name">Welcome, {{ user.username }}</span>
+            <a href="/profile/" class="nav-profile">User Profile</a>
+            <a href="/logout/" class="btn-logout">Logout</a>
+        {% else %}
+            <a href="/login/" class="btn-login">Login</a>
+            <a href="/signup/" class="btn-signup">Sign Up</a>
+        {% endif %}
+    </div>
+</nav>

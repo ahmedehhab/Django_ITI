@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="entity-card">
+    <div class="entity-toolbar">
+        <div class="entity-title">Grades List</div>
+        <a class="btn-add" href="{% url 'grade_create' %}">+ Add Grade</a>
+    </div>
+
+    <div class="search-box">
+        <form method="GET" class="search-form">
+            <input type="text" name="search" placeholder="Search by student name..." value="{{ search_query }}" class="search-input">
+            <button type="submit" class="btn-search">Search</button>
+            {% if search_query %}
+                <a href="{% url 'grades_list' %}" class="btn-clear">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+
+    {% if grades %}
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student</th><th>Subject</th><th>Score</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grade in grades %}
+                        <tr>
+                            <td>{{ grade.student.name }}</td>
+                            <td>{{ grade.subject.name }}</td>
+                            <td>{{ grade.score }}</td>
+                            <td>
+                                <a class="btn-edit" href="{% url 'grade_update' grade.pk %}">Edit</a>
+                                <a class="btn-delete" href="{% url 'grade_delete' grade.pk %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="no-data">{% if search_query %}No grades found for student "{{ search_query }}".{% else %}No grades yet. Create one to start.{% endif %}</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="entity-card">
+    <div class="entity-toolbar">
+        <div class="entity-title">Subjects List</div>
+        <a class="btn-add" href="{% url 'subject_create' %}">+ Add Subject</a>
+    </div>
+
+    <div class="search-box">
+        <form method="GET" class="search-form">
+            <input type="text" name="search" placeholder="Search by name or code..." value="{{ search_query }}" class="search-input">
+            <button type="submit" class="btn-search">Search</button>
+            {% if search_query %}
+                <a href="{% url 'subjects_list' %}" class="btn-clear">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+
+    {% if subjects %}
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th><th>Code</th><th>Description</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in subjects %}
+                        <tr>
+                            <td>{{ subject.name }}</td>
+                            <td>{{ subject.code }}</td>
+                            <td>{{ subject.description|default:'-' }}</td>
+                            <td>
+                                <a class="btn-edit" href="{% url 'subject_update' subject.pk %}">Edit</a>
+                                <a class="btn-delete" href="{% url 'subject_delete' subject.pk %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="no-data">{% if search_query %}No subjects found matching "{{ search_query }}".{% else %}No subjects yet. Create one to start.{% endif %}</p>
+    {% endif %}
+</div>
+{% endblock %}

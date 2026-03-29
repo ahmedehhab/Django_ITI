@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="form-title">{{ title }}</h2>
+        
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <small class="error-msg">{{ field.errors.0 }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit" class="btn-submit">{{ btn_text }}</button>
+        </form>
+
+        <div class="auth-footer">
+            {% if title == 'Login' %}
+                <p>New here? <a href="{% url 'signup' %}">Register</a></p>
+            {% else %}
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

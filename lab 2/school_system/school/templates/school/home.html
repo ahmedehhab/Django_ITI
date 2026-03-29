@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - School System{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1>Welcome to the School Dashboard</h1>
+    <p>Manage your students, subjects, and grades all in one place.</p>
+</div>
+
+<div class="dashboard-grid">
+    <a href="/students/" class="card">
+        <div class="card-icon">👥</div>
+        <h3>Students</h3>
+        <p>View and manage student records.</p>
+    </a>
+
+    <a href="/subjects/" class="card">
+        <div class="card-icon">📚</div>
+        <h3>Subjects</h3>
+        <p>Manage courses and curriculum.</p>
+    </a>
+
+    <a href="/grades/" class="card">
+        <div class="card-icon">📊</div>
+        <h3>Grades</h3>
+        <p>Track academic performance.</p>
+    </a>
+</div>
+{% endblock %}
