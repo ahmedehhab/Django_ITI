@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.views import APIView
 from rest_framework import viewsets, status
 from django_filters.rest_framework import DjangoFilterBackend
@@ -14,6 +14,7 @@ from .serializers import StudentSerializer, SubjectSerializer, GradeSerializer, 
 
 
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def register(request):
     username = request.data.get("username")
     password = request.data.get("password")
@@ -39,6 +40,7 @@ def register(request):
 
 
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def login(request):
     username = request.data.get("username")
     password = request.data.get("password")
